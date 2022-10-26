@@ -1,4 +1,6 @@
 {
   "url-backend" : "127.0.0.1",
-  "port" : 9999
+  "port" : 9999,
+  "database-url" : "mongodb://usuario-grupo40:usuario-grupo40@ac-yrfo6pa-shard-00-00.tholq2k.mongodb.net:27017,ac-yrfo6pa-shard-00-01.tholq2k.mongodb.net:27017,ac-yrfo6pa-shard-00-02.tholq2k.mongodb.net:27017/?ssl=true&replicaSet=atlas-8rr3k3-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "database-name" : "bd-registro-academico"
 }
