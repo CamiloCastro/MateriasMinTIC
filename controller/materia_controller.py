@@ -16,13 +16,13 @@ class ControladorMateria:
     try:
       res = self.repo_departamento.find_by_id(info_materia["id_departamento"])
     except:
-      return {"message": "El departamento con id " + info_materia["id_departamento"] + " no existe"}
+      return {"message": "El departamento con id " + info_materia["id_departamento"] + " no existe"}, 404
 
     if len(res) == 0:
-      return {"message" : "El departamento con id " + info_materia["id_departamento"] + " no existe"}
+      return {"message" : "El departamento con id " + info_materia["id_departamento"] + " no existe"}, 404
 
     nuevo_materia = Materia(info_materia)
-    return self.repo.save(nuevo_materia)
+    return self.repo.save(nuevo_materia), 200
 
   #Leer
   def show(self, id):
@@ -39,3 +39,9 @@ class ControladorMateria:
 
   def find_by_department(self, id_departamento):
     return self.repo.query({"id_departamento" : id_departamento})
+
+  def find_by_query(self, query):
+    return self.repo.query(query)
+
+  def find_by_aggregate(self, query):
+    return self.repo.aggregate(query)

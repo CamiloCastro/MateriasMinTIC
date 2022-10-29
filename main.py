@@ -57,7 +57,20 @@ def listar_materias():
 def crear_materia():
   info_materia = request.get_json()
   materia_creado = materia_controller.create(info_materia)
-  return jsonify(materia_creado)
+  return jsonify(materia_creado[0]), materia_creado[1]
+
+@app.route("/materia/query", methods=["POST"])
+def query_materia():
+  q = request.get_json()
+  materias = materia_controller.find_by_query(q)
+  return jsonify(materias)
+
+@app.route("/materia/aggregate", methods=["POST"])
+def aggregate_materia():
+  q = request.get_json()
+  materias = materia_controller.find_by_aggregate(q)
+  print(materias)
+  return jsonify(materias)
 
 @app.route("/materia/<string:id>", methods=["GET"])
 def mostrar_materia(id):

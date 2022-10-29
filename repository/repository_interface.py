@@ -61,3 +61,10 @@ class InterfaceRepository(Generic[T]):
       x["_id"] = x["_id"].__str__()
       data.append(x)
     return data
+
+  def aggregate(self, the_query):
+    col = self.base_datos[self.coleccion]
+    data = []
+    for x in col.aggregate(the_query):
+      data.append(x)
+    return data
