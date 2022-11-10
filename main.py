@@ -21,7 +21,7 @@ def load_file_config():
     data = json.load(f)
   return data
 
-@app.route("/estudiantes", methods=["GET"])
+@app.route("/estudiante", methods=["GET"])
 def listar_estudiante():
   lista_estudiantes = estudiante_controller.index()
   return jsonify(lista_estudiantes)
