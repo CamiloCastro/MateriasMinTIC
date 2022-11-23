@@ -99,6 +99,17 @@ def crear_departamento():
   departamento_creado = departamento_controller.create(info_departamento)
   return jsonify(departamento_creado)
 
+@app.route("/departamento/<string:id>", methods=["DELETE"])
+def eliminar_departamento(id):
+  resp = departamento_controller.delete(id)
+  return jsonify(resp)
+
+@app.route("/departamento/<string:id>", methods=["PUT"])
+def actualizar_departamento(id):
+  info_departamento = request.get_json()
+  materia_actualizado = departamento_controller.update(id, info_departamento)
+  return jsonify(materia_actualizado)
+
 @app.route("/inscripciones", methods=["GET"])
 def listar_inscripciones():
   lista_inscripciones = inscripcion_controller.index()
