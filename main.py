@@ -88,6 +88,11 @@ def actualizar_materia(id):
   materia_actualizado = materia_controller.update(id, info_materia)
   return jsonify(materia_actualizado)
 
+@app.route("/materia/<string:id>", methods=["DELETE"])
+def eliminar_materia(id):
+  resp = materia_controller.delete(id)
+  return jsonify(resp)
+
 @app.route("/departamentos", methods=["GET"])
 def listar_departamentos():
   lista_departamentos = departamento_controller.index()

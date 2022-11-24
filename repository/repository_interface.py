@@ -2,6 +2,9 @@ import pymongo
 import json
 from bson.objectid import ObjectId
 from typing import TypeVar, Generic, List, get_args
+import certifi
+
+ca = certifi.where()
 
 T = TypeVar('T')
 
@@ -9,7 +12,7 @@ class InterfaceRepository(Generic[T]):
 
   def __init__(self):
     data_config = self.load_config()
-    client = pymongo.MongoClient(data_config["database-url"])
+    client = pymongo.MongoClient(data_config["database-url"], tlsCAFile=ca)
     self.base_datos = client[data_config["database-name"]]
     the_class = get_args(self.__orig_bases__[0])
     self.coleccion = the_class[0].__name__.lower()
