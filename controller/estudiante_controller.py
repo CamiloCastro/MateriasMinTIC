@@ -27,4 +27,10 @@ class ControladorEstudiante:
   def delete(self, id):
     return self.repo.delete(id)
 
+  def get_by_cedula(self, cedula):
+    estudiantes = self.repo.query({"cedula" : cedula})
+    if len(estudiantes) == 0:
+      return {}
+    else:
+      return estudiantes[0]
 

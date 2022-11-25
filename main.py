@@ -48,6 +48,11 @@ def eliminar_estudiante(id):
   resp = estudiante_controller.delete(id)
   return jsonify(resp)
 
+@app.route("/estudiante/cedula/<string:cedula>", methods=["GET"])
+def estudiante_cedula(cedula):
+  est = estudiante_controller.get_by_cedula(cedula)
+  return jsonify(est)
+
 @app.route("/materias", methods=["GET"])
 def listar_materias():
   lista_materias = materia_controller.index()
@@ -119,6 +124,17 @@ def actualizar_departamento(id):
 def listar_inscripciones():
   lista_inscripciones = inscripcion_controller.index()
   return jsonify(lista_inscripciones)
+
+@app.route("/inscripcion/<string:id>", methods=["DELETE"])
+def eliminar_inscripcion(id):
+  resp = inscripcion_controller.delete(id)
+  return jsonify(resp)
+
+@app.route("/inscripcion/<string:id>", methods=["PUT"])
+def actualizar_inscripcion(id):
+  info_inscripcion = request.get_json()
+  inscripcion_actualizado = inscripcion_controller.update(id, info_inscripcion)
+  return jsonify(inscripcion_actualizado)
 
 @app.route("/inscripcion", methods=["POST"])
 def crear_inscripcion():
