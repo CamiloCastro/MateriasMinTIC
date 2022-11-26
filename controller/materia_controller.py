@@ -1,6 +1,7 @@
 from model.materia import Materia
 from repository.materia_repository import RepositorioMateria
 from repository.departamento_repository import RepositorioDepartamento
+import re
 
 class ControladorMateria:
   def __init__(self):
@@ -45,3 +46,14 @@ class ControladorMateria:
 
   def find_by_aggregate(self, query):
     return self.repo.aggregate(query)
+
+  def find_by_name(self, name):
+    pat = re.compile(r'.*' + name + '.*', re.I)
+    query = {"nombre" : {"$regex" : pat}}
+    lista_materias = self.find_by_query(query)
+    for x in lista_materias:
+      id_dep = x["id_departamento"]
+      del x["id_departamento"]
+      x["departamento"] = self.repo_departamento.find_by_id(id_dep)
+    return lista_materias
+

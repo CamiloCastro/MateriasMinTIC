@@ -87,6 +87,11 @@ def buscar_materia_departamento(id):
   est = materia_controller.find_by_department(id)
   return jsonify(est)
 
+@app.route("/materia/nombre/<string:nombre>", methods=["GET"])
+def buscar_materia_nombre(nombre):
+  est = materia_controller.find_by_name(nombre)
+  return jsonify(est)
+
 @app.route("/materia/<string:id>", methods=["PUT"])
 def actualizar_materia(id):
   info_materia = request.get_json()
